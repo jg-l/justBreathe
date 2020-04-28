@@ -9,9 +9,9 @@ There's no paid courses and no subscriptions.
 It's just you, the mind, and the breath.
 <br>
 💙 Built with Flutter.
-<br>
-[Official Webpasite](justbreathe.lising.ca)
 </div>
+
+[Official Website](https://justbreathe.lising.ca)
 
 # Features
 
