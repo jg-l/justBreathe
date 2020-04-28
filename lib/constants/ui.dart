@@ -13,6 +13,10 @@ const aboutBlurb =
     "A minimal meditation app. \nThere's no paid courses and no subscriptions.\nIt's just you, the mind, and the breath.";
 const attributionButtonText = 'Attributions';
 const contactButtonText = 'Contact';
+const websiteButtonText = 'Website';
 
 // TODO: Don't hardcode this; load it from a ENV or a build-specific file
-const devEmail = 'myEmail@email.com';
+// OPSEC: this is a public email
+const devEmail = 'lising.jg@gmail.com';
+
+const productSite = 'justbreathe.lising.ca';

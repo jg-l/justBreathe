@@ -15,6 +15,15 @@ class AboutScreen extends StatelessWidget {
     }
   }
 
+  Future<void> _launchWebsite() async {
+    const url = '$productSite';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +51,10 @@ class AboutScreen extends StatelessWidget {
                 Text(
                   aboutBlurb,
                   textAlign: TextAlign.center,
+                ),
+                FlatButton(
+                  child: Text(websiteButtonText),
+                  onPressed: () async => _launchWebsite(),
                 ),
                 SizedBox(height: 12),
                 Wrap(
