@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:just_breathe/constants/ui.dart';
+import 'package:just_breathe/generated/l10n.dart';
 import 'package:just_breathe/utils/extensions.dart';
 import 'package:just_breathe/pages_routes.dart';
 import 'package:just_breathe/screens/completion_screen.dart';
@@ -149,9 +149,9 @@ class _TimerCountdown extends State<TimerCountdown> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(68.0)),
               color: Theme.of(context).disabledColor,
-              onPressed: () => stop(),
+              onPressed: () => stop(cancelled: false),
               child: Text(
-                endButtonText.toUpperCase(),
+                S.of(context).endButton.toUpperCase(),
                 style: GoogleFonts.varelaRound(
                   color: Color(0xFF707073),
                   fontWeight: FontWeight.w600,

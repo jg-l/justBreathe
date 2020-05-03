@@ -6,6 +6,7 @@ import 'package:just_breathe/constants/theme.dart';
 import 'package:just_breathe/constants/ui.dart';
 import 'package:just_breathe/data/preset_timers.dart';
 import 'package:just_breathe/data/settings.dart';
+import 'package:just_breathe/generated/l10n.dart';
 import 'package:just_breathe/pages_routes.dart';
 import 'package:just_breathe/screens/about_screen.dart';
 import 'package:just_breathe/screens/meditation_screen.dart';
@@ -108,7 +109,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                         style: Theme.of(context).textTheme.display2,
                       ),
                       Text(
-                        tagLine,
+                        S.of(context).tagline,
                         style: Theme.of(context).textTheme.title,
                       ),
                       IconButton(
@@ -137,7 +138,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                         SettingsCard(
                           start: true,
                           title: Text(
-                            durationSettingText,
+                            S.of(context).durationSettingLabel,
                             style: Theme.of(context).textTheme.subhead,
                           ),
                           leading: Icon(Ionicons.ios_hourglass),
@@ -174,7 +175,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                         ),
                         SettingsCard(
                           title: Text(
-                            playSoundSettingText,
+                            S.of(context).playSoundSettingLabel,
                             style: Theme.of(context).textTheme.subhead,
                           ),
                           leading: Icon(Ionicons.ios_musical_note),
@@ -195,7 +196,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                         SettingsCard(
                           end: true,
                           title: Text(
-                            zenModeSettingText,
+                            S.of(context).zenModeSettingLabel,
                             style: Theme.of(context).textTheme.subhead,
                           ),
                           leading: Icon(Ionicons.ios_heart),
@@ -235,7 +236,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                             milliseconds: 300));
                       },
                       child: Text(
-                        beginButtonText.toUpperCase(),
+                        S.of(context).beginButton.toUpperCase(),
                         style: GoogleFonts.varelaRound(
                           color: fgDark,
                           fontWeight: FontWeight.w600,

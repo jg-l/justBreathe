@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:just_breathe/constants/ui.dart';
+import 'package:just_breathe/generated/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -49,22 +50,22 @@ class AboutScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 12.0),
                 Text(
-                  aboutBlurb,
+                  S.of(context).aboutBlurb,
                   textAlign: TextAlign.center,
                 ),
                 FlatButton(
-                  child: Text(websiteButtonText),
+                  child: Text(S.of(context).websiteButton),
                   onPressed: () async => _launchWebsite(),
                 ),
                 SizedBox(height: 12),
                 Wrap(
                   children: <Widget>[
                     FlatButton(
-                      child: Text(attributionButtonText),
+                      child: Text(S.of(context).attributonButton),
                       onPressed: () => showLicensePage(context: context),
                     ),
                     FlatButton(
-                      child: Text(contactButtonText),
+                      child: Text(S.of(context).contactButton),
                       onPressed: () async => _launchEmailClient(),
                     ),
                   ],

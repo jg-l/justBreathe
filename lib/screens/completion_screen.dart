@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_breathe/constants/theme.dart';
-import 'package:just_breathe/constants/ui.dart';
-import 'package:just_breathe/data/quotes.dart';
+import 'package:just_breathe/data/quote.dart';
+import 'package:just_breathe/generated/l10n.dart';
 import 'package:just_breathe/pages_routes.dart';
 import 'package:just_breathe/screens/main_screen.dart';
 import 'package:just_breathe/utils/utils.dart';
@@ -13,7 +13,7 @@ class CompletionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Quote quote = getQuote();
+    Quote quote = getQuote(context);
     return Container(
       child: Scaffold(
         body: SafeArea(
@@ -54,7 +54,7 @@ class CompletionScreen extends StatelessWidget {
                       ));
                     },
                     child: Text(
-                      homeButtonText.toUpperCase(),
+                      S.of(context).homeButton.toUpperCase(),
                       style: GoogleFonts.varelaRound(
                         color: fgDark,
                         fontWeight: FontWeight.w600,

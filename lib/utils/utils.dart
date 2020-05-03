@@ -3,7 +3,8 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:just_breathe/data/quotes.dart';
+import 'package:just_breathe/constants/quotes.dart';
+import 'package:just_breathe/data/quote.dart';
 
 /// Loads the licenses and attributions used by this project
 void loadLicenses() {
@@ -26,8 +27,9 @@ bool isDark(BuildContext context) {
 }
 
 /// A function that returns a random quote from [kDefaultQuotes]
-Quote getQuote() {
+Quote getQuote(BuildContext context) {
   var r = Random(DateTime.now().millisecondsSinceEpoch);
-  var randInt = r.nextInt(kDefaultQuotes.length);
-  return kDefaultQuotes[randInt];
+  final quotes = kDefaultQuotes(context);
+  var randInt = r.nextInt(quotes.length);
+  return quotes[randInt];
 }

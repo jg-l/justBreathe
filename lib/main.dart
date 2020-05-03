@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:just_breathe/constants/theme.dart';
 import 'package:just_breathe/constants/ui.dart';
 import 'package:just_breathe/data/settings.dart';
@@ -8,6 +9,7 @@ import 'package:just_breathe/pages_routes.dart';
 import 'package:just_breathe/screens/main_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'generated/l10n.dart';
 
 void main() {
   loadLicenses();
@@ -26,6 +28,12 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => MeditationModel(),
       child: MaterialApp(
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
         builder: (context, widget) {
           return ResponsiveWrapper.builder(
             widget,
