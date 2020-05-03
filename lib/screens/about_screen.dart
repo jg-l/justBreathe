@@ -17,7 +17,7 @@ class AboutScreen extends StatelessWidget {
   }
 
   Future<void> _launchWebsite() async {
-    const url = '$productSite';
+    const url = 'https://$productSite';
     if (await canLaunch(url)) {
       await launch(url);
     } else {

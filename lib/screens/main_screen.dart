@@ -108,6 +108,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                         appTitle,
                         style: Theme.of(context).textTheme.display2,
                       ),
+                      SizedBox(
+                        height: 12,
+                      ),
                       Text(
                         S.of(context).tagline,
                         style: Theme.of(context).textTheme.title,
