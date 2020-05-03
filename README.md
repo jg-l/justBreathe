@@ -33,7 +33,11 @@ It's just you, the mind, and the breath.
 
 # Roadmap to Production
 
-- [ ] French Localization
-- [ ] Swedish localization
+- [x] French Localization
+- [ ] Basic testing
 - [ ] Release the app on the Play Store! (PROD)
 - [ ] Release the app on the App Store! (PROD)
+
+# Future
+
+- [ ] Add more localizations: Swedish
