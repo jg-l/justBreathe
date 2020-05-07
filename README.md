@@ -8,7 +8,7 @@
 <a href='https://play.google.com/store/apps/details?id=ca.lising.justbreathe&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height="80" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 </div>
 <br>
-[Official Website](https://justbreathe.lising.ca)
+<a href="https://justbreathe.lising.ca">Official Website</a>
 A minimal meditation app. 
 There's no paid courses and no subscriptions.
 It's just you, the mind, and the breath.
