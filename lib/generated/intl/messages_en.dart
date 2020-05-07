@@ -19,6 +19,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static m0(minute) => "${minute} minutes";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "aboutBlurb" : MessageLookupByLibrary.simpleMessage("A minimal meditation app. \nThere\'s no paid courses and no subscriptions.\nIt\'s just you, the mind, and the breath."),
@@ -41,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parillaQuote" : MessageLookupByLibrary.simpleMessage("You are where you need to be. Just take a deep breath."),
     "plathQuote" : MessageLookupByLibrary.simpleMessage("I took a deep breath and listened to the old bray of my heart: I am, I am, I am."),
     "playSoundSettingLabel" : MessageLookupByLibrary.simpleMessage("Play Sounds"),
+    "presetDuration" : m0,
     "proverbQuote" : MessageLookupByLibrary.simpleMessage("The nose is for breathing, the mouth is for eating."),
     "tagline" : MessageLookupByLibrary.simpleMessage("Take time to breathe"),
     "websiteButton" : MessageLookupByLibrary.simpleMessage("Website"),

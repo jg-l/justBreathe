@@ -135,7 +135,7 @@ class _TimerCountdown extends State<TimerCountdown> {
                     Container(
                       child: Text(
                         _display,
-                        style: Theme.of(context).textTheme.body2,
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
                   ],
@@ -149,7 +149,7 @@ class _TimerCountdown extends State<TimerCountdown> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(68.0)),
               color: Theme.of(context).disabledColor,
-              onPressed: () => stop(cancelled: false),
+              onPressed: () => stop(),
               child: Text(
                 S.of(context).endButton.toUpperCase(),
                 style: GoogleFonts.varelaRound(

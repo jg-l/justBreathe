@@ -46,7 +46,7 @@ class AboutScreen extends StatelessWidget {
               children: <Widget>[
                 Text(
                   appTitle,
-                  style: Theme.of(context).textTheme.headline,
+                  style: Theme.of(context).textTheme.headline5,
                 ),
                 SizedBox(height: 12.0),
                 Text(

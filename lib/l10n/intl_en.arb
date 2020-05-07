@@ -25,5 +25,7 @@
     "proverbQuote": "The nose is for breathing, the mouth is for eating.",
     "browningQuote": "He lives most life whoever breathes most air.",
     "matthiessenQuote": "In this very breath that we now take lies the secret that all great teachers try to tell us.",
-    "plathQuote": "I took a deep breath and listened to the old bray of my heart: I am, I am, I am."
+    "plathQuote": "I took a deep breath and listened to the old bray of my heart: I am, I am, I am.",
+    "@section": "Preset Durations",
+    "presetDuration": "{minute} minutes"
 }

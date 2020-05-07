@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as cupertino;
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_breathe/constants/preset_timers.dart';
 import 'package:just_breathe/constants/theme.dart';
 import 'package:just_breathe/constants/ui.dart';
 import 'package:just_breathe/data/preset_timers.dart';
@@ -28,7 +29,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   bool playSounds;
   bool isZenMode;
-  PresetDuration _presetDuration;
+  Duration _presetDuration;
 
   AnimationController _scaffold;
   AnimationController _logo;
@@ -106,14 +107,14 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                     children: <Widget>[
                       Text(
                         appTitle,
-                        style: Theme.of(context).textTheme.display2,
+                        style: Theme.of(context).textTheme.headline3,
                       ),
                       SizedBox(
                         height: 12,
                       ),
                       Text(
                         S.of(context).tagline,
-                        style: Theme.of(context).textTheme.title,
+                        style: Theme.of(context).textTheme.headline6,
                       ),
                       IconButton(
                           icon: Icon(
@@ -142,23 +143,22 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                           start: true,
                           title: Text(
                             S.of(context).durationSettingLabel,
-                            style: Theme.of(context).textTheme.subhead,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                           leading: Icon(Ionicons.ios_hourglass),
-                          trailing: DropdownButton<PresetDuration>(
+                          trailing: DropdownButton<Duration>(
                             underline: Container(),
-                            items: Provider.of<MeditationModel>(context,
-                                    listen: false)
-                                .presets
-                                .map((preset) {
-                              return DropdownMenuItem<PresetDuration>(
+                            items: kPresetTimers.map((preset) {
+                              return DropdownMenuItem<Duration>(
                                 value: preset,
                                 child: Text(
-                                  preset.name,
+                                  S
+                                      .of(context)
+                                      .presetDuration(preset.inMinutes),
                                   textAlign: TextAlign.right,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subhead
+                                      .subtitle1
                                       .copyWith(
                                         fontWeight: FontWeight.w300,
                                       ),
@@ -179,7 +179,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                         SettingsCard(
                           title: Text(
                             S.of(context).playSoundSettingLabel,
-                            style: Theme.of(context).textTheme.subhead,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                           leading: Icon(Ionicons.ios_musical_note),
                           trailing: cupertino.CupertinoSwitch(
@@ -200,7 +200,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                           end: true,
                           title: Text(
                             S.of(context).zenModeSettingLabel,
-                            style: Theme.of(context).textTheme.subhead,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                           leading: Icon(Ionicons.ios_heart),
                           trailing: cupertino.CupertinoSwitch(

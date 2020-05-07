@@ -28,7 +28,7 @@ class CompletionScreen extends StatelessWidget {
                   '“${quote.body}”',
                   style: Theme.of(context)
                       .textTheme
-                      .title
+                      .headline6
                       .copyWith(fontStyle: FontStyle.italic),
                   textAlign: TextAlign.center,
                 ),
@@ -36,7 +36,7 @@ class CompletionScreen extends StatelessWidget {
                 Text(
                   quote.author,
                   textAlign: TextAlign.right,
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
                 SizedBox(height: 36.0),
                 Padding(

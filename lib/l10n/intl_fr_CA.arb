@@ -25,5 +25,7 @@
     "proverbQuote": "Le nez est pour respirer, la bouche est pour manger.",
     "browningQuote": "Celui qui respire le plus vit le plus.",
     "matthiessenQuote": "C'est dans cette respiration même que réside le secret que tous les grands professeurs essaient de nous dire.",
-    "plathQuote": "J'inspirais profondément et entendit la vieille rengaine de mon cœur : je suis, je suis, je suis."
+    "plathQuote": "J'inspirais profondément et entendit la vieille rengaine de mon cœur : je suis, je suis, je suis.",
+    "@section": "Preset Durations",
+    "presetDuration": "{minute} minutes"
 }

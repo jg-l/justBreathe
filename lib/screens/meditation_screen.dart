@@ -11,9 +11,7 @@ class MeditationScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: TimerCountdown(
-          Provider.of<MeditationModel>(context, listen: false)
-              .duration
-              .duration,
+          Provider.of<MeditationModel>(context, listen: false).duration,
           zenMode:
               Provider.of<MeditationModel>(context, listen: false).isZenMode,
           playSounds:

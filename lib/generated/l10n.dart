@@ -251,6 +251,15 @@ class S {
       args: [],
     );
   }
+
+  String presetDuration(Object minute) {
+    return Intl.message(
+      '$minute minutes',
+      name: 'presetDuration',
+      desc: '',
+      args: [minute],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
