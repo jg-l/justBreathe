@@ -9,6 +9,7 @@
 </div>
 <br>
 <a href="https://justbreathe.lising.ca">Official Website</a>
+<br>
 A minimal meditation app. 
 There's no paid courses and no subscriptions.
 It's just you, the mind, and the breath.
