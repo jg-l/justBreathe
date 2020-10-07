@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:just_breathe/data/settings.dart';
+import 'package:just_breathe/model/settings.dart';
 import 'package:just_breathe/widgets/timer_countdown.dart';
 import 'package:provider/provider.dart';
 

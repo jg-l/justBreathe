@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_breathe/constants/quotes.dart';
-import 'package:just_breathe/data/quote.dart';
+import 'package:just_breathe/model/quote.dart';
 
 /// Loads the licenses and attributions used by this project
 void loadLicenses() {

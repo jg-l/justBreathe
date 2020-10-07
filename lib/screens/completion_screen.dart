@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_breathe/constants/theme.dart';
-import 'package:just_breathe/data/quote.dart';
+import 'package:just_breathe/model/quote.dart';
 import 'package:just_breathe/generated/l10n.dart';
 import 'package:just_breathe/pages_routes.dart';
 import 'package:just_breathe/screens/main_screen.dart';

@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:just_breathe/constants/preset_timers.dart';
 import 'package:just_breathe/constants/theme.dart';
 import 'package:just_breathe/constants/ui.dart';
-import 'package:just_breathe/data/settings.dart';
+import 'package:just_breathe/model/settings.dart';
 import 'package:just_breathe/generated/l10n.dart';
 import 'package:just_breathe/pages_routes.dart';
 import 'package:just_breathe/screens/about_screen.dart';
