@@ -1,5 +1,5 @@
 /// This the preset timers presented in [MainScreen]
-List<Duration> kPresetTimers = <Duration>[
+const List<Duration> kPresetTimers = <Duration>[
   Duration(minutes: 5),
   Duration(minutes: 10),
   Duration(minutes: 15),
