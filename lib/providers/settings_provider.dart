@@ -1,11 +1,6 @@
 import 'package:flutter_riverpod/all.dart';
 import 'package:just_breathe/model/settings.dart';
 
-final appState = StateProvider<AppState>((ref) {
-  final AppState out = AppState();
-  return out;
-});
-
 class AppStateNotifier extends StateNotifier<AppState> {
   AppStateNotifier([AppState appState]) : super(appState ?? AppState());
 
