@@ -8,7 +8,6 @@ import 'package:just_breathe/model/settings.dart';
 import 'package:just_breathe/utils/utils.dart';
 import 'package:just_breathe/pages_routes.dart';
 import 'package:just_breathe/screens/main_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'generated/l10n.dart';
 
