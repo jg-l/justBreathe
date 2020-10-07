@@ -12,7 +12,6 @@ import 'package:just_breathe/providers/settings_provider.dart';
 import 'package:just_breathe/screens/about_screen.dart';
 import 'package:just_breathe/screens/meditation_screen.dart';
 import 'package:just_breathe/widgets/settings_card.dart';
-import 'package:just_breathe/widgets/switcher.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
