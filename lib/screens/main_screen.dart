@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as cupertino;
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_breathe/constants/preset_timers.dart';
 import 'package:just_breathe/constants/theme.dart';
 import 'package:just_breathe/constants/ui.dart';
-import 'package:just_breathe/model/settings.dart';
 import 'package:just_breathe/generated/l10n.dart';
 import 'package:just_breathe/pages_routes.dart';
+import 'package:just_breathe/providers/settings_provider.dart';
 import 'package:just_breathe/screens/about_screen.dart';
 import 'package:just_breathe/screens/meditation_screen.dart';
 import 'package:just_breathe/widgets/settings_card.dart';
-import 'package:provider/provider.dart';
+import 'package:just_breathe/widgets/switcher.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -26,10 +27,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
-  bool playSounds;
-  bool isZenMode;
-  Duration _presetDuration;
-
   AnimationController _scaffold;
   AnimationController _logo;
   Animation<Offset> _animation;
@@ -38,11 +35,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    playSounds =
-        Provider.of<MeditationModel>(context, listen: false).playSounds;
-    isZenMode = Provider.of<MeditationModel>(context, listen: false).isZenMode;
-    _presetDuration =
-        Provider.of<MeditationModel>(context, listen: false).duration;
 
     _scaffold = AnimationController(
         vsync: this,
@@ -145,33 +137,37 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
                           leading: Icon(Ionicons.ios_hourglass),
-                          trailing: DropdownButton<Duration>(
-                            underline: Container(),
-                            items: kPresetTimers.map((preset) {
-                              return DropdownMenuItem<Duration>(
-                                value: preset,
-                                child: Text(
-                                  S
-                                      .of(context)
-                                      .presetDuration(preset.inMinutes),
-                                  textAlign: TextAlign.right,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1
-                                      .copyWith(
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                ),
+                          trailing: Consumer(
+                            builder: (BuildContext context,
+                                T Function<T>(ProviderBase<Object, T>) watch,
+                                Widget child) {
+                              final _appState = watch(appStateProvider.state);
+                              return DropdownButton<Duration>(
+                                underline: Container(),
+                                items: kPresetTimers.map((preset) {
+                                  return DropdownMenuItem<Duration>(
+                                    value: preset,
+                                    child: Text(
+                                      S
+                                          .of(context)
+                                          .presetDuration(preset.inMinutes),
+                                      textAlign: TextAlign.right,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1
+                                          .copyWith(
+                                            fontWeight: FontWeight.w300,
+                                          ),
+                                    ),
+                                  );
+                                }).toList(),
+                                value: _appState.duration,
+                                onChanged: (value) {
+                                  context
+                                      .read(appStateProvider)
+                                      .setDuration(value);
+                                },
                               );
-                            }).toList(),
-                            value: _presetDuration,
-                            onChanged: (value) {
-                              setState(() {
-                                Provider.of<MeditationModel>(context,
-                                        listen: false)
-                                    .duration = value;
-                                _presetDuration = value;
-                              });
                             },
                           ),
                         ),
@@ -181,18 +177,20 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
                           leading: Icon(Ionicons.ios_musical_note),
-                          trailing: cupertino.CupertinoSwitch(
-                            activeColor: accent,
-                            onChanged: (value) {
-                              setState(() {
-                                playSounds = value;
-                                Provider.of<MeditationModel>(context,
-                                        listen: false)
-                                    .playSounds = value;
-                              });
+                          trailing: Consumer(
+                            builder: (BuildContext context, ScopedReader watch,
+                                Widget child) {
+                              final _appState = watch(appStateProvider.state);
+                              return cupertino.CupertinoSwitch(
+                                activeColor: accent,
+                                onChanged: (value) {
+                                  context
+                                      .read(appStateProvider)
+                                      .togglePlaySounds();
+                                },
+                                value: _appState.playSounds,
+                              );
                             },
-                            value: Provider.of<MeditationModel>(context)
-                                .playSounds,
                           ),
                         ),
                         SettingsCard(
@@ -202,18 +200,21 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
                           leading: Icon(Ionicons.ios_heart),
-                          trailing: cupertino.CupertinoSwitch(
-                            activeColor: accent,
-                            onChanged: (bool value) {
-                              setState(() {
-                                isZenMode = value;
-                                Provider.of<MeditationModel>(context,
-                                        listen: false)
-                                    .isZenMode = value;
-                              });
+                          // ignore: missing_required_param
+                          trailing: Consumer(
+                            builder: (BuildContext context, ScopedReader watch,
+                                Widget child) {
+                              final _appState = watch(appStateProvider.state);
+                              return cupertino.CupertinoSwitch(
+                                activeColor: accent,
+                                onChanged: (_) {
+                                  context
+                                      .read(appStateProvider)
+                                      .toggleZenMode();
+                                },
+                                value: _appState.isZenMode,
+                              );
                             },
-                            value:
-                                Provider.of<MeditationModel>(context).isZenMode,
                           ),
                         ),
                       ],

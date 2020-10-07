@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:just_breathe/model/settings.dart';
+import 'package:flutter_riverpod/all.dart';
+import 'package:just_breathe/providers/settings_provider.dart';
 import 'package:just_breathe/widgets/timer_countdown.dart';
-import 'package:provider/provider.dart';
 
 class MeditationScreen extends StatelessWidget {
   const MeditationScreen({Key key}) : super(key: key);
@@ -11,11 +11,9 @@ class MeditationScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: TimerCountdown(
-          Provider.of<MeditationModel>(context, listen: false).duration,
-          zenMode:
-              Provider.of<MeditationModel>(context, listen: false).isZenMode,
-          playSounds:
-              Provider.of<MeditationModel>(context, listen: false).playSounds,
+          context.read(appStateProvider.state).duration,
+          zenMode: context.read(appStateProvider.state).isZenMode,
+          playSounds: context.read(appStateProvider.state).playSounds,
         ),
       ),
     );
