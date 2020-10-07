@@ -4,10 +4,12 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_breathe/generated/l10n.dart';
+import 'package:just_breathe/model/quote.dart';
 import 'package:just_breathe/utils/extensions.dart';
 import 'package:just_breathe/pages_routes.dart';
 import 'package:just_breathe/screens/completion_screen.dart';
 import 'package:just_breathe/screens/main_screen.dart';
+import 'package:just_breathe/utils/utils.dart';
 import 'package:just_breathe/widgets/nash_breathe.dart';
 import 'package:just_breathe/widgets/countdown_circle.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -110,8 +112,12 @@ class _TimerCountdown extends State<TimerCountdown> {
       Navigator.of(context).pushReplacement(
           PageRoutes.fade(() => MainScreen(), milliseconds: 450));
     } else {
-      Navigator.of(context).pushReplacement(
-          PageRoutes.fade(() => CompletionScreen(), milliseconds: 800));
+      Quote _quote = getQuote(context);
+      Navigator.of(context).pushReplacement(PageRoutes.fade(
+          () => CompletionScreen(
+                quote: _quote,
+              ),
+          milliseconds: 800));
     }
   }
 

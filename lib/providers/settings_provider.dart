@@ -17,6 +17,10 @@ class AppStateNotifier extends StateNotifier<AppState> {
     state = state.copyWith(playSounds: !state.playSounds);
   }
 
+  void toggleDarkMode() {
+    state = state.copyWith(isDarkMode: !state.isDarkMode);
+  }
+
   void setDuration(Duration duration) {
     state = state.copyWith(duration: duration);
   }

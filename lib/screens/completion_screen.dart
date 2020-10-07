@@ -5,17 +5,23 @@ import 'package:just_breathe/model/quote.dart';
 import 'package:just_breathe/generated/l10n.dart';
 import 'package:just_breathe/pages_routes.dart';
 import 'package:just_breathe/screens/main_screen.dart';
-import 'package:just_breathe/utils/utils.dart';
+import 'package:just_breathe/widgets/dark_mode_switcher.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class CompletionScreen extends StatelessWidget {
-  const CompletionScreen({Key key}) : super(key: key);
+  const CompletionScreen({Key key, this.quote}) : super(key: key);
+  final Quote quote;
 
   @override
   Widget build(BuildContext context) {
-    Quote quote = getQuote(context);
     return Container(
       child: Scaffold(
+        appBar: AppBar(
+          leading: SizedBox.shrink(),
+          actions: [
+            DarkModeSwitcher(),
+          ],
+        ),
         body: SafeArea(
           child: Center(
             child: Column(

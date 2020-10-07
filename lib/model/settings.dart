@@ -1,5 +1,4 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:just_breathe/constants/preset_timers.dart';
 
 part 'settings.g.dart';
 
@@ -9,10 +8,12 @@ class AppState {
   bool isZenMode;
   bool playSounds;
   Duration duration;
+  bool isDarkMode;
 
   AppState({
     this.isZenMode = false,
     this.playSounds = false,
+    this.isDarkMode = false,
     this.duration = const Duration(minutes: 5),
   });
 }
