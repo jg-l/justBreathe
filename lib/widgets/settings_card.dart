@@ -10,6 +10,7 @@ class SettingsCard extends StatefulWidget {
   final bool start;
   // When enabled, the bottom border is rounded
   final bool end;
+  final bool isFlat;
   SettingsCard(
       {this.leading,
       this.title,
@@ -17,7 +18,8 @@ class SettingsCard extends StatefulWidget {
       this.trailing,
       this.start = false,
       this.end = false,
-      Key key})
+      Key key,
+      this.isFlat = true})
       : super(key: key);
 
   @override
@@ -29,13 +31,14 @@ class _SettingsCard extends State<SettingsCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
-      margin: EdgeInsets.only(bottom: 1.0, left: 21.0, right: 21.0),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(widget.start ? 20.0 : 0.0),
-          bottom: Radius.circular(widget.end ? 20.0 : 0.0),
-        ),
+        borderRadius: !widget.isFlat
+            ? BorderRadius.vertical(
+                top: Radius.circular(widget.start ? 20.0 : 0.0),
+                bottom: Radius.circular(widget.end ? 20.0 : 0.0),
+              )
+            : BorderRadius.zero,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.max,

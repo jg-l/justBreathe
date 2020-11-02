@@ -17,13 +17,14 @@ class PageRoutes {
       pageBuilder: (context, animation, secondaryAnimation) => page(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return ScaleTransition(
-            scale: Tween<double>(begin: 2.05, end: 1.0).animate(
-              CurvedAnimation(
-                parent: animation,
-                curve: Curves.easeInOutQuart,
-              ),
+          scale: Tween<double>(begin: 2.05, end: 1.0).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOutQuart,
             ),
-            child: child);
+          ),
+          child: child,
+        );
       },
     );
   }
@@ -57,7 +58,6 @@ class PageRoutes {
           position: Tween<Offset>(begin: startOffset, end: Offset(0, 0))
               .animate(CurvedAnimation(
                   parent: animation, curve: reverse ? easeReverse : easeFwd)),
-          child: child,
         );
       },
     );

@@ -31,10 +31,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   AnimationController _logo;
   Animation<Offset> _animation;
   Animation<Offset> _logoAnimation;
+  ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
+
+    _scrollController = ScrollController();
 
     _scaffold = AnimationController(
         vsync: this,
@@ -73,190 +76,365 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       position: _animation,
       child: Scaffold(
         appBar: AppBar(
-          leading: SizedBox.shrink(),
+          automaticallyImplyLeading: false,
           actions: [
             DarkModeSwitcher(),
           ],
+          centerTitle: true,
+          title: SlideTransition(
+            position: _logoAnimation,
+            child: SvgPicture.asset(
+              'assets/images/lotus.svg',
+              semanticsLabel: '$appTitle logo',
+              color: accent,
+              fit: BoxFit.contain,
+              width: 50,
+            ),
+          ),
         ),
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Spacer(
-                flex: 1,
-              ),
               Expanded(
-                child: SlideTransition(
-                  position: _logoAnimation,
-                  child: SvgPicture.asset(
-                    'assets/images/lotus.svg',
-                    semanticsLabel: '$appTitle logo',
-                    color: accent,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      appTitle,
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      S.of(context).tagline,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    IconButton(
-                        icon: Icon(
-                          Feather.info,
-                          color: Theme.of(context)
-                              .iconTheme
-                              .color
-                              .withOpacity(0.25),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(PageRoutes.slide(
-                              () => AboutScreen(),
-                              startOffset: Offset(0, 1),
-                              milliseconds: 580));
-                        }),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Container(
-                  // padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: SingleChildScrollView(
+                  controller: _scrollController,
                   child: Column(
-                    children: <Widget>[
-                      SettingsCard(
-                        start: true,
-                        title: Text(
-                          S.of(context).durationSettingLabel,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        leading: Icon(Ionicons.ios_hourglass),
-                        trailing: Consumer(
-                          builder: (BuildContext context,
-                              T Function<T>(ProviderBase<Object, T>) watch,
-                              Widget child) {
-                            final _appState = watch(appStateProvider.state);
-                            return DropdownButton<Duration>(
-                              underline: Container(),
-                              items: kPresetTimers.map((preset) {
-                                return DropdownMenuItem<Duration>(
-                                  value: preset,
-                                  child: Text(
-                                    S
-                                        .of(context)
-                                        .presetDuration(preset.inMinutes),
-                                    textAlign: TextAlign.right,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1
-                                        .copyWith(
-                                          fontWeight: FontWeight.w300,
-                                        ),
-                                  ),
-                                );
-                              }).toList(),
-                              value: _appState.duration,
-                              onChanged: (value) {
-                                context
-                                    .read(appStateProvider)
-                                    .setDuration(value);
-                              },
-                            );
-                          },
-                        ),
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BreatheModeCard2(
+                        title: 'Free',
+                        subtitle: 'Follow your intuition and breathe freely',
+                        image:
+                            'https://images.unsplash.com/photo-1592130672383-00c96d75706b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
                       ),
-                      SettingsCard(
-                        title: Text(
-                          S.of(context).playSoundSettingLabel,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        leading: Icon(Ionicons.ios_musical_note),
-                        trailing: Consumer(
-                          builder: (BuildContext context, ScopedReader watch,
-                              Widget child) {
-                            final _appState = watch(appStateProvider.state);
-                            return cupertino.CupertinoSwitch(
-                              activeColor: accent,
-                              onChanged: (value) {
-                                context
-                                    .read(appStateProvider)
-                                    .togglePlaySounds();
-                              },
-                              value: _appState.playSounds,
-                            );
-                          },
-                        ),
+                      BreatheModeCard2(
+                        title: 'Box',
+                        subtitle:
+                            'Instill calm and dispel anxiety by controlling the four corners of breathing.',
+                        image:
+                            'https://images.unsplash.com/photo-1592634047088-7a1f85644183?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
                       ),
-                      SettingsCard(
-                        end: true,
-                        title: Text(
-                          S.of(context).zenModeSettingLabel,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        leading: Icon(Ionicons.ios_heart),
-                        // ignore: missing_required_param
-                        trailing: Consumer(
-                          builder: (BuildContext context, ScopedReader watch,
-                              Widget child) {
-                            final _appState = watch(appStateProvider.state);
-                            return cupertino.CupertinoSwitch(
-                              activeColor: accent,
-                              onChanged: (_) {
-                                context.read(appStateProvider).toggleZenMode();
-                              },
-                              value: _appState.isZenMode,
-                            );
-                          },
-                        ),
+                      BreatheModeCard2(
+                        title: 'Wim Hof',
+                        subtitle:
+                            'Reduce stress, inflammation, and improve breathing efficiency.',
+                        image:
+                            'https://images.unsplash.com/photo-1485809108442-19e5b56de493?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80',
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 4,
                       ),
                     ],
                   ),
                 ),
               ),
-              Spacer(
-                flex: 1,
-              ),
-              Flexible(
-                flex: 1,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 21.0),
-                  child: FlatButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(68.0),
-                    ),
-                    color: Theme.of(context).accentColor,
-                    onPressed: () {
-                      Navigator.of(context).push(PageRoutes.fade(
-                          () => MeditationScreen(),
-                          milliseconds: 300));
-                    },
-                    child: Text(
-                      S.of(context).beginButton.toUpperCase(),
-                      style: GoogleFonts.varelaRound(
-                        color: fgDark,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18.0,
-                      ),
-                    ).padding(all: 18.0),
-                  ),
-                ),
-              ),
-              Spacer(
-                flex: 1,
-              ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class BreatheModeCard2 extends StatefulWidget {
+  const BreatheModeCard2({
+    Key key,
+    this.title,
+    this.subtitle,
+    this.image,
+  }) : super(key: key);
+  final String title;
+  final String subtitle;
+  final String image;
+
+  @override
+  _BreatheModeCard2State createState() => _BreatheModeCard2State();
+}
+
+class _BreatheModeCard2State extends State<BreatheModeCard2>
+    with TickerProviderStateMixin {
+  bool isOpen = false;
+  bool isSelected = false;
+  AnimationController _controller;
+  Animation<double> _animation;
+
+  initState() {
+    super.initState();
+
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 5000),
+        vsync: this,
+        value: 0,
+        lowerBound: 0,
+        upperBound: 1);
+    _animation =
+        CurvedAnimation(parent: _controller, curve: Curves.bounceInOut);
+
+    _controller.forward();
+  }
+
+  @override
+  dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isOpen = !isOpen;
+          isSelected = !isSelected;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 400),
+        margin: EdgeInsets.all(36.0),
+        decoration: BoxDecoration(
+          color: Theme.of(context).canvasColor,
+          borderRadius: BorderRadius.circular(36.0),
+          boxShadow: [
+            BoxShadow(
+              spreadRadius: !isSelected ? 0 : 0.8,
+              color: Colors.black.withOpacity(0.15),
+              blurRadius: !isSelected ? 0 : 12.0,
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(36.0)),
+              child: Image.network(
+                widget.image,
+                fit: BoxFit.cover,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 7,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.title,
+                    style: Theme.of(context).textTheme.headline5.copyWith(),
+                  ),
+                  Text(
+                    widget.subtitle,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 56,
+                  ),
+                ],
+              ),
+            ),
+            AnimatedSize(
+              vsync: this,
+              duration: Duration(milliseconds: 320),
+              child: Container(
+                child: isOpen
+                    ? FadeTransition(
+                        opacity: _animation,
+                        child: Column(
+                          children: [
+                            SettingsCard(
+                              isFlat: false,
+                              end: false,
+                              title: Text(
+                                S.of(context).durationSettingLabel,
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                              leading: Icon(Ionicons.ios_hourglass),
+                              trailing: Consumer(
+                                builder: (BuildContext context,
+                                    T Function<T>(ProviderBase<Object, T>)
+                                        watch,
+                                    Widget child) {
+                                  final _appState =
+                                      watch(appStateProvider.state);
+                                  return DropdownButton<Duration>(
+                                    underline: Container(),
+                                    items: kPresetTimers.map((preset) {
+                                      return DropdownMenuItem<Duration>(
+                                        value: preset,
+                                        child: Text(
+                                          S
+                                              .of(context)
+                                              .presetDuration(preset.inMinutes),
+                                          textAlign: TextAlign.right,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1
+                                              .copyWith(
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    value: _appState.duration,
+                                    onChanged: (value) {
+                                      context
+                                          .read(appStateProvider)
+                                          .setDuration(value);
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                            SettingsCard(
+                              title: Text(
+                                S.of(context).playSoundSettingLabel,
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                              leading: Icon(Ionicons.ios_musical_note),
+                              trailing: Consumer(
+                                builder: (BuildContext context,
+                                    ScopedReader watch, Widget child) {
+                                  final _appState =
+                                      watch(appStateProvider.state);
+                                  return cupertino.CupertinoSwitch(
+                                    activeColor: accent,
+                                    onChanged: (value) {
+                                      context
+                                          .read(appStateProvider)
+                                          .togglePlaySounds();
+                                    },
+                                    value: _appState.playSounds,
+                                  );
+                                },
+                              ),
+                            ),
+                            SettingsCard(
+                              isFlat: false,
+                              end: true,
+                              title: Text(
+                                S.of(context).zenModeSettingLabel,
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                              leading: Icon(Ionicons.ios_heart),
+                              // ignore: missing_required_param
+                              trailing: Consumer(
+                                builder: (BuildContext context,
+                                    ScopedReader watch, Widget child) {
+                                  final _appState =
+                                      watch(appStateProvider.state);
+                                  return cupertino.CupertinoSwitch(
+                                    activeColor: accent,
+                                    onChanged: (_) {
+                                      context
+                                          .read(appStateProvider)
+                                          .toggleZenMode();
+                                    },
+                                    value: _appState.isZenMode,
+                                  );
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 72,
+                            ),
+                            FlatButton(
+                              minWidth: double.maxFinite,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(68.0),
+                              ),
+                              color: Theme.of(context).accentColor,
+                              onPressed: () {
+                                Navigator.of(context).push(PageRoutes.fade(
+                                    () => MeditationScreen(),
+                                    milliseconds: 300));
+                              },
+                              child: Text(
+                                S.of(context).beginButton.toUpperCase(),
+                                style: GoogleFonts.varelaRound(
+                                  color: fgDark,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18.0,
+                                ),
+                              ).padding(all: 18.0),
+                            ),
+                          ],
+                        ),
+                      )
+                    : null,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BreatheModeCard extends StatefulWidget {
+  const BreatheModeCard({Key key, this.subtitle}) : super(key: key);
+
+  final String subtitle;
+
+  @override
+  _BreatheModeCardState createState() => _BreatheModeCardState();
+}
+
+class _BreatheModeCardState extends State<BreatheModeCard> {
+  bool isOpened = false;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isOpened = !isOpened;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 150),
+        margin: EdgeInsets.symmetric(horizontal: isOpened ? 0 : 24.0),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height / 8,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24.0),
+          image: DecorationImage(
+            image: NetworkImage(
+                'https://images.unsplash.com/photo-1564500617448-e541b1df7cee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'),
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.5), BlendMode.hardLight),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: Text(
+                'Free',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    .copyWith(color: Colors.white),
+                textAlign: TextAlign.right,
+              ),
+            ),
+            Text(
+              widget.subtitle,
+              style: Theme.of(context)
+                  .textTheme
+                  .subtitle2
+                  .copyWith(color: Colors.white70),
+              textAlign: TextAlign.left,
+            ),
+          ],
         ),
       ),
     );
