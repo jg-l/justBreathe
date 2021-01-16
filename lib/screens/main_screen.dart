@@ -346,7 +346,6 @@ class _BreatheModeCard2State extends State<BreatheModeCard2>
                               height: MediaQuery.of(context).size.height / 72,
                             ),
                             FlatButton(
-                              minWidth: double.maxFinite,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(68.0),
                               ),
