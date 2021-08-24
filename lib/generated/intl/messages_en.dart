@@ -24,7 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "aboutBlurb" : MessageLookupByLibrary.simpleMessage("A minimal meditation app. \nThere\'s no paid courses and no subscriptions.\nIt\'s just you, the mind, and the breath."),
-    "anonQuote" : MessageLookupByLibrary.simpleMessage("A healthy miind has an easy breath."),
+    "anonQuote" : MessageLookupByLibrary.simpleMessage("A healthy mind has an easy breath."),
     "aristotleQuote" : MessageLookupByLibrary.simpleMessage("Whosoever is delighted in solitude is either a wild beast or a god."),
     "attributonButton" : MessageLookupByLibrary.simpleMessage("Attributions"),
     "beginButton" : MessageLookupByLibrary.simpleMessage("Begin"),
