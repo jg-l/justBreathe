@@ -8,18 +8,26 @@ import 'intl/messages_all.dart';
 // Made by Localizely
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+// ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
+// ignore_for_file: avoid_redundant_argument_values
+
 class S {
   S();
+  
+  static S current;
   
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final String name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final String localeName = Intl.canonicalizedLocale(name);
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      return S();
+      S.current = S();
+      
+      return S.current;
     });
   } 
 
@@ -27,6 +35,7 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Take time to breathe`
   String get tagline {
     return Intl.message(
       'Take time to breathe',
@@ -36,6 +45,7 @@ class S {
     );
   }
 
+  /// `Duration`
   String get durationSettingLabel {
     return Intl.message(
       'Duration',
@@ -45,6 +55,7 @@ class S {
     );
   }
 
+  /// `Play Sounds`
   String get playSoundSettingLabel {
     return Intl.message(
       'Play Sounds',
@@ -54,6 +65,7 @@ class S {
     );
   }
 
+  /// `Zen Mode`
   String get zenModeSettingLabel {
     return Intl.message(
       'Zen Mode',
@@ -63,6 +75,7 @@ class S {
     );
   }
 
+  /// `Begin`
   String get beginButton {
     return Intl.message(
       'Begin',
@@ -72,6 +85,7 @@ class S {
     );
   }
 
+  /// `End`
   String get endButton {
     return Intl.message(
       'End',
@@ -81,6 +95,7 @@ class S {
     );
   }
 
+  /// `Home`
   String get homeButton {
     return Intl.message(
       'Home',
@@ -90,6 +105,7 @@ class S {
     );
   }
 
+  /// `A minimal meditation app. \nThere's no paid courses and no subscriptions.\nIt's just you, the mind, and the breath.`
   String get aboutBlurb {
     return Intl.message(
       'A minimal meditation app. \nThere\'s no paid courses and no subscriptions.\nIt\'s just you, the mind, and the breath.',
@@ -99,6 +115,7 @@ class S {
     );
   }
 
+  /// `Attributions`
   String get attributonButton {
     return Intl.message(
       'Attributions',
@@ -108,6 +125,7 @@ class S {
     );
   }
 
+  /// `Contact`
   String get contactButton {
     return Intl.message(
       'Contact',
@@ -117,6 +135,7 @@ class S {
     );
   }
 
+  /// `Website`
   String get websiteButton {
     return Intl.message(
       'Website',
@@ -126,6 +145,7 @@ class S {
     );
   }
 
+  /// `Whosoever is delighted in solitude is either a wild beast or a god.`
   String get aristotleQuote {
     return Intl.message(
       'Whosoever is delighted in solitude is either a wild beast or a god.',
@@ -135,6 +155,7 @@ class S {
     );
   }
 
+  /// `Seclusion is the price of greatness.`
   String get yogandaQuote {
     return Intl.message(
       'Seclusion is the price of greatness.',
@@ -144,6 +165,7 @@ class S {
     );
   }
 
+  /// `People who take the time to be alone usually have depth, originality, and quiet reserve.`
   String get millerQuote {
     return Intl.message(
       'People who take the time to be alone usually have depth, originality, and quiet reserve.',
@@ -153,6 +175,7 @@ class S {
     );
   }
 
+  /// `Breathing is the greatest pleasure in life`
   String get papiniQuote {
     return Intl.message(
       'Breathing is the greatest pleasure in life',
@@ -162,6 +185,7 @@ class S {
     );
   }
 
+  /// `Breathe. Let go. And remind yourself that this very moment is the only one you know you have for sure.`
   String get oprahQuote {
     return Intl.message(
       'Breathe. Let go. And remind yourself that this very moment is the only one you know you have for sure.',
@@ -171,6 +195,7 @@ class S {
     );
   }
 
+  /// `Breathe in deeply to bring your mind home to your body.`
   String get hanhQuote {
     return Intl.message(
       'Breathe in deeply to bring your mind home to your body.',
@@ -180,6 +205,7 @@ class S {
     );
   }
 
+  /// `All chronic pain, suffering, and diseases are caused by a lack of oxygen at the cell level.`
   String get guytonQuote {
     return Intl.message(
       'All chronic pain, suffering, and diseases are caused by a lack of oxygen at the cell level.',
@@ -189,6 +215,7 @@ class S {
     );
   }
 
+  /// `Remember to breathe. It is after all, the secret of life.`
   String get maguireQuote {
     return Intl.message(
       'Remember to breathe. It is after all, the secret of life.',
@@ -198,6 +225,7 @@ class S {
     );
   }
 
+  /// `You are where you need to be. Just take a deep breath.`
   String get parillaQuote {
     return Intl.message(
       'You are where you need to be. Just take a deep breath.',
@@ -207,15 +235,17 @@ class S {
     );
   }
 
+  /// `A healthy mind has an easy breath.`
   String get anonQuote {
     return Intl.message(
-      'A healthy miind has an easy breath.',
+      'A healthy mind has an easy breath.',
       name: 'anonQuote',
       desc: '',
       args: [],
     );
   }
 
+  /// `The nose is for breathing, the mouth is for eating.`
   String get proverbQuote {
     return Intl.message(
       'The nose is for breathing, the mouth is for eating.',
@@ -225,6 +255,7 @@ class S {
     );
   }
 
+  /// `He lives most life whoever breathes most air.`
   String get browningQuote {
     return Intl.message(
       'He lives most life whoever breathes most air.',
@@ -234,6 +265,7 @@ class S {
     );
   }
 
+  /// `In this very breath that we now take lies the secret that all great teachers try to tell us.`
   String get matthiessenQuote {
     return Intl.message(
       'In this very breath that we now take lies the secret that all great teachers try to tell us.',
@@ -243,6 +275,7 @@ class S {
     );
   }
 
+  /// `I took a deep breath and listened to the old bray of my heart: I am, I am, I am.`
   String get plathQuote {
     return Intl.message(
       'I took a deep breath and listened to the old bray of my heart: I am, I am, I am.',
@@ -252,6 +285,7 @@ class S {
     );
   }
 
+  /// `{minute} minutes`
   String presetDuration(Object minute) {
     return Intl.message(
       '$minute minutes',
@@ -270,6 +304,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'fr', countryCode: 'CA'),
       Locale.fromSubtags(languageCode: 'fr', countryCode: 'FR'),
+      Locale.fromSubtags(languageCode: 'hi', countryCode: 'IN'),
+      Locale.fromSubtags(languageCode: 'sv'),
     ];
   }
 
@@ -282,7 +318,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   bool _isSupported(Locale locale) {
     if (locale != null) {
-      for (Locale supportedLocale in supportedLocales) {
+      for (var supportedLocale in supportedLocales) {
         if (supportedLocale.languageCode == locale.languageCode) {
           return true;
         }
